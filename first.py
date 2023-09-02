@@ -57,6 +57,24 @@ def pretty_print_keys(keys: list[str]):
         print(f"{key[0]:<4} | {key[1]}")
     return
 
+def keyword_search(lines: list[str], words: list[str]):
+    '''
+    Search for word matches and print the lines 
+    that contain the keyword
+    '''
+
+    print("Seach for", words)
+    for line in lines:
+        if any(word.lower() in line[1].lower() for word in words):
+            print(f"{line[0]:<4} | {line[1]}")
+    
+    print("Search done")
+    return
+
 
 if __name__ == "__main__":
-    pretty_print_keys(parse_keybinds(load_keybind_section()))
+    cleaned_keys = parse_keybinds(load_keybind_section())
+
+    pretty_print_keys(cleaned_keys)
+
+    keyword_search(cleaned_keys, ['move'])
